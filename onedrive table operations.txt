@@ -1,0 +1,55 @@
+https://developer.microsoft.com/en-us/graph/graph-explorer/preview
+
+
+step 1 - delete existing table
+
+DELETE
+syntax: https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables('{table id}')
+
+https://graph.microsoft.com/v1.0/me/drive/items/01JOZHAQM4NMM4SS3CZ5EY3WJWYBHHITOD/workbook/tables('1')
+
+- - - - - - - - - - - - - - - - 
+
+step 2 - create new table
+
+POST
+syntax: https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets/{id|name}/tables/add
+
+https://graph.microsoft.com/v1.0/me/drive/items/01JOZHAQM4NMM4SS3CZ5EY3WJWYBHHITOD/workbook/worksheets/sheet2/tables/add
+
+{
+  "address": "A1:B2",
+  "hasHeaders": false
+}
+- - - - - - - - - - - - - - - - 
+
+step 3 - rename column headers
+
+PATCH
+syntax: https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/worksheets('{worksheet name}')/range(address='worksheet!cellrange')
+
+https://graph.microsoft.com/v1.0/me/drive/items/01JOZHAQM4NMM4SS3CZ5EY3WJWYBHHITOD/workbook/worksheets('sheet2')/range(address='sheet2!A1:B1')
+
+{"values":[["id","name"]]}
+
+- - - - - - - - - - - - - - - - 
+
+step 4 - write data to new table
+
+POST
+syntax: https://graph.microsoft.com/v1.0/me/drive/items/{id}/workbook/tables('{legacyId}')/rows
+
+https://graph.microsoft.com/v1.0/me/drive/items/01JOZHAQM4NMM4SS3CZ5EY3WJWYBHHITOD/workbook/tables('1')/rows
+
+adding multiple rows:
+
+{"index":0,"values":[
+["1","fgrjkjva  afawef"],
+["2","f fjyj gte"],
+["3","fe5yhh6 geyhjjh"],
+["4","eg9jbf hj5jg"],
+["5","jrdgerty eraergd"],
+["6","kokbr rthrew"]
+]}
+
+- - - - - - - - - - - - - - - - 
